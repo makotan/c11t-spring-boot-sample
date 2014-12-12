@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+        >
+
+    <bean id="sqlManager" class="jp.sf.amateras.mirage.SqlManagerImpl">
+        <property name="dialect" ref="dialect" />
+        <property name="nameConverter" ref="nameConverter"/>
+        <property name="connectionProvider" ref="connectionProvider" />
+        <property name="beanDescFactory">
+            <bean class="jp.sf.amateras.mirage.bean.BeanDescFactory">
+                <property name="propertyExtractor">
+                    <bean class="jp.sf.amateras.mirage.bean.FieldPropertyExtractor" />
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="nameConverter" class="jp.sf.amateras.mirage.naming.RailsLikeNameConverter"/>
+    <bean id="dialect" class="jp.sf.amateras.mirage.dialect.PostgreSQLDialect"/>
+    <bean id="connectionProvider" class="jp.sf.amateras.mirage.integration.spring.SpringConnectionProvider">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean class="org.springframework.data.mirage.repository.support.MiragePersistenceExceptionTranslator" />
+    <bean class="org.springframework.data.mirage.repository.support.FieldPropertyExtractorInitializer"/>
+    <bean class="org.springframework.data.mirage.repository.support.EnableSLF4JBridgeHandler" />
+
+</beans>

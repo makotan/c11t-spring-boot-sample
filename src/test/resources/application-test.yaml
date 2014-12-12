@@ -1,0 +1,8 @@
+spring:
+    datasource:
+        name: dataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://server/c11t
+        username: c11t
+        password: c11t
+
