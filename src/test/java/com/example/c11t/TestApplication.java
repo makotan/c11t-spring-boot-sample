@@ -1,4 +1,4 @@
-package app;
+package com.example.c11t;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
  * Time: 12:37
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.c11t"})
+@ComponentScan
 @ImportResource("mirageContext.xml")
 public class TestApplication {
 
